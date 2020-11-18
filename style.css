@@ -1,0 +1,25 @@
+body{
+  background-color: #F3F3F3;
+}
+.navbar{
+  margin-bottom: 25px;
+}
+.navbar-brand{
+  font-family: Viga;
+  font-size: 30px;
+}
+.nav-item{
+  font-size: 20px;
+}
+.text-color-a{
+  color: black;
+}
+.text-color-a:hover{
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.footer p{
+  color: #acacac;
+  font-size: 18px;
+}
