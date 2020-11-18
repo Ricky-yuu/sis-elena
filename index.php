@@ -139,7 +139,7 @@
     <!-- footer start -->
     <div class="row footer">
       <div class="col text-center">
-        <p>	&copy; 2020 SMAN 1 Akabiluru</p>
+        <p>	&copy; 2020 SMAN 1 AKABILURU</p>
       </div>
     </div>
     <!-- footer end -->
