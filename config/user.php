@@ -1,19 +1,5 @@
 <?php
 
-//mendaftarkan user
-function register_user($nama, $pass){
-  global $link;
-
-  //mencegah sql injection
-  $nama = escape($nama);
-  $pass = escape($pass);
-
-  $query = "INSERT INTO users (username, password) VALUES ('$nama', '$pass')";
-
-  if( mysqli_query($link, $query) ) return true;
-  else return false;
-}
-
 function cek_nama($nama){
     global $link;
     $nama = escape($nama);
@@ -80,19 +66,5 @@ function flash_delete($name){
     echo $_SESSION['msg'];
     unset($_SESSION['msg']);
 }
-
-//menguji status user apakah admin atau bukan
-// function cek_status($nama){
-//   global $link;
-//   $nama = escape($nama);
-//
-//   $query = "SELECT role FROM tabel_pengurus WHERE username='$nama'";
-//
-//   $result = mysqli_query($link, $query);
-//   $status = mysqli_fetch_assoc($result)['role'];
-//
-//   if( $status == 1) return true;
-//   else return false;
-// }
 
 ?>
