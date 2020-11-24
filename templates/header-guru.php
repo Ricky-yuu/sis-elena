@@ -47,7 +47,12 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link fa fa-user-circle-o text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?php echo htmlentities($rowUser['nama']) ?>
+                <?php
+                  $nama_user = $rowUser['nama'];
+                  $pecah_nama = explode(" ", $nama_user);
+
+                  echo htmlentities($pecah_nama[0] . " " . $pecah_nama[1]); 
+                ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item fa fa-gear" href="#">Edit Profile</a>
