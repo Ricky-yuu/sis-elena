@@ -51,7 +51,11 @@
                   $nama_user = $rowUser['nama'];
                   $pecah_nama = explode(" ", $nama_user);
 
-                  echo htmlentities($pecah_nama[0] . " " . $pecah_nama[1]);
+                  if (count($pecah_nama) > 2 ) {
+                    echo htmlentities($pecah_nama[0] . " " . $pecah_nama[1]);
+                  }else {
+                    echo htmlentities($pecah_nama[0]);
+                  }
                 ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
