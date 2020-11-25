@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link fa fa-dashboard text-white" href="#">Dasboard <span class="sr-only">(current)</span></a>
+              <a class="nav-link fa fa-dashboard text-white" href="dasboard-guru.php">Dasboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link fa fa-mortar-board text-white" href="#">Akademik</a>
@@ -60,7 +60,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item fa fa-gear" href="#">Edit Profile</a>
-                <a class="dropdown-item fa fa-lock" href="#">Edit Password</a>
+                <a class="dropdown-item fa fa-lock" href="pass_editguru.php">Edit Password</a>
                 <a class="dropdown-item fa fa-sign-out" href="logout.php">Log Out</a>
               </div>
             </li>
