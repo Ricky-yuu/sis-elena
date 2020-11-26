@@ -1,21 +1,20 @@
 <?php include 'templates/header.php' ?>
 <?php
-$id = $_SESSION["user"];/* userid of the user */
-$con = mysqli_connect('localhost','root','','sis_elena') or die('Unable To connect');
-if(count($_POST)>0) {
-$result = mysqli_query($con,"SELECT *from siswa WHERE nis='" . $id . "'");
-$row=mysqli_fetch_array($result);
-if($_POST["currentPassword"] == $row["password"] && $_POST["newPassword"] ) {
-mysqli_query($con,"UPDATE siswa set password='" . $_POST["newPassword"] . "' WHERE nis='" . $id . "'");
-$message = "Password Changed Sucessfully";
-} else{
- $message = "Password is not correct";
-}
-}
+  $id = $_SESSION["user"];/* userid of the user */
+  $con = mysqli_connect('localhost','root','','sis_elena') or die('Unable To connect');
+  if(count($_POST)>0) {
+    $result = mysqli_query($con,"SELECT *from siswa WHERE nis='" . $id . "'");
+    $row=mysqli_fetch_array($result);
+    if($_POST["currentPassword"] == $row["password"] && $_POST["newPassword"] ) {
+      mysqli_query($con,"UPDATE siswa set password='" . $_POST["newPassword"] . "' WHERE nis='" . $id . "'");
+      $message = "Password Changed Sucessfully";
+    } else{
+      $message = "Password is not correct";
+    }
+  }
 ?>
 <!DOCTYPE html>
 <center>
-<head>
 <title>Change Password</title>
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <script>
@@ -47,11 +46,10 @@ if(newPassword.value != confirmPassword.value) {
 	newPassword.focus();
 	document.getElementById("confirmPassword").innerHTML = "not same";
 	output = false;
-} 	
+}
 return output;
 }
 </script>
-</head>
 <body>
     <form name="frmChange" method="post" action=""
         onSubmit="return validatePassword()">
@@ -59,7 +57,7 @@ return output;
             <div class="message"><?php if(isset($message)) { echo $message; } ?></div>
             <table border="0" cellpadding="10" cellspacing="0"
                 width="500" align="center" class="tblSaveForm">
-                <tr class="tableheader">
+                <tr class="bg-success">
                     <td colspan="2">Change Password</td>
                 </tr>
                 <tr>
