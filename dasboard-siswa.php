@@ -1,8 +1,8 @@
 <?php
   include 'templates/header.php';
-  $no = 1;
+
   $kelasUser = $rowUser['kode_kelas'];
-  $tampilMapel = mysqli_query($link, "SELECT nama_mapel FROM mapel where kode_kelas = '$kelasUser'");
+  $tampilMapel = mysqli_query($link, "SELECT nama_mapel, kode_mapel FROM mapel where kode_kelas = '$kelasUser'");
 ?>
 
     <!-- main start-->
@@ -13,7 +13,7 @@
         ?>
         <div class="col mb-4">
           <div class="card">
-            <a href="data-perlengkapan-edit.php?id=<?php echo $no++;?>" class="text-color-a">
+            <a href="view-mapel.php?id=<?php echo $dataMapel['kode_mapel'];?>" class="text-color-a">
               <img src="./asset/img/matematika-logo.jpg" class="card-img-top mx-auto d-block" alt="..." style="width:70%">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $dataMapel['nama_mapel'] ?></h5>
