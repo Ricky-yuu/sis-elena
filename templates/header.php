@@ -59,7 +59,7 @@
                 ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item fa fa-gear" href="#">Edit Profile</a>
+                <a class="dropdown-item fa fa-gear" href="edit_profile.php">Edit Profile</a>
                 <a class="dropdown-item fa fa-lock" href="pass_editsiswa.php">Edit Password</a>
                 <a class="dropdown-item fa fa-sign-out" href="logout.php">Log Out</a>
               </div>
