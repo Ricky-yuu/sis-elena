@@ -1,8 +1,11 @@
 <?php
   include 'templates/header-guru.php';
   $id = $_GET['id'];
-  $kodeMapelGuru = $rowUser['kode_mapel'];
-  $tampilMateriQuery = mysqli_query($link, "SELECT * FROM materi_mapel where kode_kelas='$id' and kode_mapel='$kodeMapelGuru'");
+  $kodeGuru = $rowUser['nip'];
+  $kodeMapelGuruQuery = mysqli_query($link, "SELECT * FROM tb_mengajar where kode_guru='$kodeGuru' and kode_kelas='$id'");
+  $kodeMapelGuru = mysqli_fetch_array($kodeMapelGuruQuery);
+  $kodeMapelGuru2 = $kodeMapelGuru['kode_mapel'];
+  $tampilMateriQuery = mysqli_query($link, "SELECT * FROM materi_mapel where kode_kelas='$id' and kode_mapel='$kodeMapelGuru2'");
   //$tampilMateri = mysqli_fetch_array($tampilMateriQuery);
 ?>
 
@@ -10,6 +13,7 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-md-1">
         <?php
+        //echo $kodeMapelGuru2;
           while ($tampilMateri = mysqli_fetch_array($tampilMateriQuery)) :
         ?>
         <div class="col mb-4">
