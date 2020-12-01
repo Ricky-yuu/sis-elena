@@ -25,7 +25,15 @@
               </div>
           </div>
         </div>
-      <?php endwhile; ?>
+        <?php endwhile; ?>
+        <div class="col mb-4">
+          <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tambah Aktivitas Baru</h5>
+                <a href="tambah-aktivitas.php" class="btn btn-primary">Tambah</a>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- main end-->
