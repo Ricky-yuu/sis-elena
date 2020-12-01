@@ -14,7 +14,7 @@
           <div class="card">
               <div class="card-body">
                 <a href="view-assign.php" class="text-color-a"><h5 class="card-title"><?php echo $tampilMateri['judul']; ?></h5></a>
-                <p class="card-text">Presensi, 2 Januari 2020</p>
+                <a href="view-presensi.php?id=<?php echo $id; ?>" class="card-text text-color-a">Presensi, 2 Januari 2020</a>
                 <p class="card-text">Materi Pengantar Aljabar</p>
               </div>
           </div>
