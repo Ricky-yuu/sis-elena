@@ -13,7 +13,7 @@
         <div class="col mb-4">
           <div class="card">
               <div class="card-body">
-                <a href="#" class="text-color-a"><h5 class="card-title"><?php echo $tampilMateri['judul']; ?></h5></a>
+                <a href="view-assign.php" class="text-color-a"><h5 class="card-title"><?php echo $tampilMateri['judul']; ?></h5></a>
                 <p class="card-text">Presensi, 2 Januari 2020</p>
                 <p class="card-text">Materi Pengantar Aljabar</p>
               </div>
