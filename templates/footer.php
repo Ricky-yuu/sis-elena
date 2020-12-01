@@ -31,7 +31,7 @@
      });
      $(function(){
        $('.timepicker').timepicker({
-             showInputs: false
+             showInputs: true
           })
       });
     </script>
