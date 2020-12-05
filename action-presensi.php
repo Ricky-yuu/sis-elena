@@ -9,8 +9,9 @@
     $kdabsen = "mtk1";
     $querynya = mysqli_query($link, "UPDATE presensi SET status='$status', catatan='1' WHERE kode_aktivitas='$kode_aktivitas2' AND nis='$kode_siswa2'");
     if($querynya){
-        //header.loca
-      }else{
+      echo "<script>
+              document.location='view-presensi.php?id=" . $kode_aktivitas2 ."';
+            </script>";
       }
   }
 
