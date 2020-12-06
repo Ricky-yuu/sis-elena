@@ -43,7 +43,7 @@
               <a class="nav-link fa fa-dashboard text-white" href="dasboard-siswa.php">Dasboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fa fa-mortar-board text-white" href="#">Akademik</a>
+              <a class="nav-link fa fa-mortar-board text-white" href="akademik.php">Akademik</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link fa fa-user-circle-o text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +59,7 @@
                 ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item fa fa-gear" href="#">Edit Profile</a>
+                <a class="dropdown-item fa fa-gear" href="edit_profile.php">Edit Profile</a>
                 <a class="dropdown-item fa fa-lock" href="pass_editsiswa.php">Edit Password</a>
                 <a class="dropdown-item fa fa-sign-out" href="logout.php">Log Out</a>
               </div>
