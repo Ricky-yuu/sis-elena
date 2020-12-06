@@ -2,6 +2,23 @@
   include 'templates/header.php';
   $kode_aktivitas = $_GET['idm'];
   $kode_siswa = $rowUser['nis'];
+  $materi_mapel_query = mysqli_query($link, "SELECT kode_mapel, judul, kode_aktivitas, kode_aktivitas2 FROM materi_mapel WHERE kode_aktivitas='$kode_aktivitas'");
+  $tampil_materi_query = mysqli_fetch_array($materi_mapel_query);
+
+  $tampil_presensi2 = mysqli_query($link, "SELECT * FROM presensi2 where kode_aktivitas = '$kode_aktivitas'");
+  $tampilkan_presensi2 = mysqli_fetch_array($tampil_presensi2);
+
+  $tampil_presensi = mysqli_query($link, "SELECT * FROM presensi where kode_aktivitas = '$kode_aktivitas' AND nis='$kode_siswa'");
+  $tampilkan_presensi = mysqli_fetch_array($tampil_presensi);
+  if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i')){
+    echo "<script>
+            document.location='view-presensi.php?id=" . $kode_aktivitas ."';
+          </script>";
+  }elseif ($tampilkan_presensi['catatan'] == 1) {
+    echo "<script>
+            document.location='view-presensi.php?id=" . $kode_aktivitas ."';
+          </script>";
+  }
   if (isset($_POST['simpan'])) {
     $status = $_POST['customRadioInline1'];
     $kode_aktivitas2 = $_POST['aktivitas'];
