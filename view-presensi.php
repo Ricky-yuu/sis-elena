@@ -1,5 +1,6 @@
 <?php
   include 'templates/header.php';
+  date_default_timezone_set('Asia/Jakarta');
   $kode_mapel = $_GET['id'];
   $kode_siswaview = $rowUser['nis'];
   $materi_mapel_query = mysqli_query($link, "SELECT kode_mapel, judul, kode_aktivitas, kode_aktivitas2 FROM materi_mapel WHERE kode_aktivitas='$kode_mapel'");
@@ -30,7 +31,7 @@
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Presensi</h5>
-                  <div class="card bg-transparent border-0" style="width: 25rem;">
+                  <div class="card bg-transparent border-0" style="width: 18rem;">
                     <table class="table">
                       <thead>
                         <tr>
@@ -41,13 +42,16 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><?php echo $tampilkan_presensi2['tanggal_akhir']; ?></td>
+                          <td><?php echo date('D, d M y', strtotime($tampilkan_presensi2['tanggal_akhir'])) . " " . date('H:i', strtotime($tampilkan_presensi2['jam_mulai'])) . " - " . date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])); ?></td>
                           <td><?php echo $tampilkan_presensi['status']; ?></td>
                           <td>
-                            <?php if ($tampilkan_presensi['catatan'] == 0){ ?>
-                              <a href="action-presensi.php?idm=<?php echo $kode_mapel; ?>" class="text-color-a">Presensi</a></td>
-                            <?php }else{
+                            <?php if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i')){
                               echo "<p>Presensi<p>";
+                            }elseif ($tampilkan_presensi['catatan'] == 1) {
+                              echo "<p>Presensi<p>";
+                            }else{?>
+                              <a href="action-presensi.php?idm=<?php echo $kode_mapel; ?>" class="text-color-a">Presensi</a></td>
+                            <?php
                             }?>
                         </tr>
                       </tbody>
