@@ -6,6 +6,9 @@ $password = '';
 $db       = 'sis_elena';
 
 
-$link = mysqli_connect($host, $user, $password, $db) or die(mysqli_error());
+$link = mysqli_connect($host, $user, $password, $db);
+if (!$link) {
+  die("Connection failed: " . mysqli_connect_error());
+}
 
 ?>
