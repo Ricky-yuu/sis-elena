@@ -1,6 +1,5 @@
 <?php
   include 'templates/header.php';
-  date_default_timezone_set('Asia/Jakarta');
   $kode_mapel = $_GET['id'];
   $kode_siswaview = $rowUser['nis'];
   $materi_mapel_query = mysqli_query($link, "SELECT kode_mapel, judul, kode_aktivitas, kode_aktivitas2 FROM materi_mapel WHERE kode_aktivitas='$kode_mapel'");
@@ -45,8 +44,8 @@
                           <td><?php echo date('D, d M y', strtotime($tampilkan_presensi2['tanggal_akhir'])) . " " . date('H:i', strtotime($tampilkan_presensi2['jam_mulai'])) . " - " . date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])); ?></td>
                           <td><?php echo $tampilkan_presensi['status']; ?></td>
                           <td>
-                            <?php if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i')){
-                              echo "<p>Presensi<p>";
+                            <?php if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i') && date('D, d M y', strtotime($tampilkan_presensi2['tanggal_akhir'])) >= date('D, d M y')){
+                              echo "<p>Presensi2<p>";
                             }elseif ($tampilkan_presensi['catatan'] == 1) {
                               echo "<p>Presensi<p>";
                             }else{?>

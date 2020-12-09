@@ -3,12 +3,26 @@
   $kode_aktivitas = $_GET['idm'];
   $kode_siswa = $rowUser['nis'];
 
-  $tampil_presensi2 = mysqli_query($link, "SELECT jam_akhir FROM presensi2 where kode_aktivitas = '$kode_aktivitas'");
+  $date_now = date("Y-m-d");
+  $time_now = date("H:i:s");
+
+  if (isset($_POST['simpan'])) {
+    $status = $_POST['customRadioInline1'];
+    $kode_aktivitas2 = $_POST['aktivitas'];
+    $kode_siswa2 = $_POST['kode_aktivitas_siswa'];
+    $querynya = mysqli_query($link, "UPDATE presensi SET status='$status', catatan='1', tanggal='$date_now', jam='$time_now' WHERE kode_aktivitas='$kode_aktivitas2' AND nis='$kode_siswa2'");
+    if($querynya){
+      echo "<script>
+              document.location='view-presensi.php?id=" . $kode_aktivitas2 ."';
+            </script>";
+      }
+  }
+  $tampil_presensi2 = mysqli_query($link, "SELECT jam_akhir, tanggal_akhir FROM presensi2 where kode_aktivitas = '$kode_aktivitas'");
   $tampilkan_presensi2 = mysqli_fetch_array($tampil_presensi2);
 
   $tampil_presensi = mysqli_query($link, "SELECT catatan FROM presensi where kode_aktivitas = '$kode_aktivitas' AND nis='$kode_siswa'");
   $tampilkan_presensi = mysqli_fetch_array($tampil_presensi);
-  if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i')){
+  if (date('H:i', strtotime($tampilkan_presensi2['jam_akhir'])) <= date('H:i') && date('D, d M y', strtotime($tampilkan_presensi2['tanggal_akhir'])) >= date('D, d M y')){
     echo "<script>
             document.location='view-presensi.php?id=" . $kode_aktivitas ."';
           </script>";
@@ -16,18 +30,6 @@
     echo "<script>
             document.location='view-presensi.php?id=" . $kode_aktivitas ."';
           </script>";
-  }
-  if (isset($_POST['simpan'])) {
-    $status = $_POST['customRadioInline1'];
-    $kode_aktivitas2 = $_POST['aktivitas'];
-    $kode_siswa2 = $_POST['kode_aktivitas_siswa'];
-    $kdabsen = "mtk1";
-    $querynya = mysqli_query($link, "UPDATE presensi SET status='$status', catatan='1' WHERE kode_aktivitas='$kode_aktivitas2' AND nis='$kode_siswa2'");
-    if($querynya){
-      echo "<script>
-              document.location='view-presensi.php?id=" . $kode_aktivitas2 ."';
-            </script>";
-      }
   }
 
 ?>
@@ -57,7 +59,7 @@
                   </div>
                   <div class="col-sm-10 mt-3">
                     <button class="btn btn-success " name="simpan" type="submit">Simpan</button>
-                    <a href="javascript:window.history.go(-1);" class="btn btn-success" type="submit">Batal</a>
+                    <a href="view-presensi.php?id=<?php echo $kode_aktivitas; ?>" class="btn btn-success">Batal</a>
                   </div>
                   <input type="text" class="inputan" name="aktivitas" value="<?php echo $kode_aktivitas; ?>" style="display:none;">
                   <input type="text" class="inputan" name="kode_aktivitas_siswa" value="<?php echo $kode_siswa; ?>" style="display:none;">
