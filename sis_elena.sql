@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2020 at 11:30 AM
+-- Generation Time: Dec 09, 2020 at 12:43 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `sis_elena`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aktivitas`
+--
+
+CREATE TABLE `aktivitas` (
+  `kode_aktivitas` varchar(15) NOT NULL,
+  `id_tugas` varchar(11) DEFAULT NULL,
+  `id_presensi` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -145,24 +157,22 @@ CREATE TABLE `materi_mapel` (
   `id` int(11) NOT NULL,
   `kode_mapel` varchar(50) NOT NULL,
   `judul` varchar(50) NOT NULL,
-  `kode_aktivitas` varchar(50) NOT NULL,
-  `tanggal` date NOT NULL,
-  `jam` varchar(10) NOT NULL,
-  `kode_kelas` varchar(20) NOT NULL,
-  `deskripsi` varchar(200) NOT NULL
+  `kode_aktivitas` int(11) DEFAULT NULL,
+  `kode_aktivitas2` int(11) DEFAULT NULL,
+  `kode_aktivitas3` int(11) DEFAULT NULL,
+  `kode_kelas` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `materi_mapel`
 --
 
-INSERT INTO `materi_mapel` (`id`, `kode_mapel`, `judul`, `kode_aktivitas`, `tanggal`, `jam`, `kode_kelas`, `deskripsi`) VALUES
-(1, 'PA01', 'Bab 1 Aljabar', '12', '2020-04-01', '12.12', 'KPA01', 'sda'),
-(2, 'PA01', 'Bab 1 Trigonometri', '12', '2020-10-25', '12', 'KPA01', '1231'),
-(3, 'PA02', 'Bab 1 GGL', '123', '2020-04-01', '12.12', 'KPA01', '123123'),
-(4, 'PA09', 'Bab 1 Pesawat Sederhana', '123', '2020-04-01', '12.12', 'KPA02', 'das'),
-(5, 'PA10', 'Bab 1 Aljabar', '12', '2020-04-01', '12.12', 'KPA02', 'asd'),
-(6, 'PA18', 'Bab 1 Aljabar', '12', '2020-04-01', '12.12', 'A3', 'asd');
+INSERT INTO `materi_mapel` (`id`, `kode_mapel`, `judul`, `kode_aktivitas`, `kode_aktivitas2`, `kode_aktivitas3`, `kode_kelas`) VALUES
+(1, 'PA01', 'Bab 1 Aljabar', NULL, 1, NULL, 'KPA01'),
+(2, 'PA01', 'Bab 1 Trigonometri', 2, 2, NULL, 'KPA01'),
+(3, 'PA10', 'Bab 1 Aljabar', 3, NULL, NULL, 'KPA02'),
+(25, 'PA01', 'BAB 3 KALKULUS', 29, NULL, NULL, 'KPA01'),
+(26, 'PA10', 'BAB 3 KALKULUS', 30, NULL, NULL, 'KPA02');
 
 -- --------------------------------------------------------
 
@@ -186,10 +196,56 @@ CREATE TABLE `nilai` (
 
 CREATE TABLE `presensi` (
   `kd_presensi` int(11) NOT NULL,
-  `hari` varchar(10) NOT NULL,
-  `jam` int(10) NOT NULL,
-  `tanggal` date NOT NULL
+  `kode_aktivitas` int(11) NOT NULL,
+  `kode_mapel` varchar(20) DEFAULT NULL,
+  `nis` varchar(20) DEFAULT NULL,
+  `jam` time DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `status` varchar(15) DEFAULT NULL,
+  `catatan` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `presensi`
+--
+
+INSERT INTO `presensi` (`kd_presensi`, `kode_aktivitas`, `kode_mapel`, `nis`, `jam`, `tanggal`, `status`, `catatan`) VALUES
+(1, 2, 'PA01', '1234', '00:00:12', '2020-04-01', 'Alpha', 1),
+(2, 2, 'PA01', '1222', '00:00:12', '2020-04-01', 'ijin', 1),
+(3, 3, 'PA10', '1235', NULL, NULL, 'd', 1),
+(4, 2, 'PA01', '1112', NULL, NULL, 'Masok', 1),
+(1005, 29, 'PA01', '1112', '16:41:43', '2020-12-09', 'hadir', 1),
+(1006, 29, 'PA01', '1222', '00:00:16', '2020-12-09', 'hadir', 1),
+(1007, 29, 'PA01', '1234', '16:44:50', '2020-12-09', 'hadir', 1),
+(1008, 30, 'PA10', '1235', '18:01:33', '2020-12-09', 'Alpha', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `presensi2`
+--
+
+CREATE TABLE `presensi2` (
+  `kode_aktivitas` int(11) NOT NULL,
+  `nama_presensi` varchar(50) NOT NULL,
+  `kode_mapel` varchar(10) NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `jam_mulai` time NOT NULL,
+  `tanggal_akhir` date NOT NULL,
+  `jam_akhir` time NOT NULL,
+  `deskripsi` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `presensi2`
+--
+
+INSERT INTO `presensi2` (`kode_aktivitas`, `nama_presensi`, `kode_mapel`, `tanggal_mulai`, `jam_mulai`, `tanggal_akhir`, `jam_akhir`, `deskripsi`) VALUES
+(1, 'Presensi Aljabar', 'PA01', '2020-12-05', '08:00:00', '2020-12-05', '23:00:00', 'Presensi hari ini'),
+(2, 'Presensi Trigonometri', 'PA01', '2020-12-05', '07:00:00', '2020-12-05', '15:17:00', 'absen jangan lupa'),
+(3, 'Presensi Aljabar', 'PA10', '2020-12-05', '08:00:00', '2020-12-25', '23:00:00', NULL),
+(29, 'ABSEN BAB 1', 'PA01', '2020-12-17', '19:07:00', '2020-12-31', '19:07:00', 'asd'),
+(30, 'ABSEN BAB 1', 'PA10', '2020-12-09', '17:44:00', '2020-12-10', '17:44:00', 'presensi');
 
 -- --------------------------------------------------------
 
@@ -198,7 +254,7 @@ CREATE TABLE `presensi` (
 --
 
 CREATE TABLE `siswa` (
-  `nis` int(4) NOT NULL,
+  `nis` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
   `alamat` varchar(50) NOT NULL,
@@ -211,9 +267,11 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `email`, `alamat`, `password`, `kode_kelas`) VALUES
-(1222, 'Bangik', 'asd', 'asd', '123', 'A3'),
-(1234, 'Ricky Aditya Wardana', 'Meliodaskirisami@gmail.co', 'Desa Jajag Kecamatan Gambiran Banyuwangi', '1234', 'KPA01'),
-(1235, 'Muhammad Audino Fakhri Arnandya', 'dino12@gmail.com', 'Desa Jajag Kecamatan Gambiran Banyuwangi', 'akabiluru1', 'KPA02');
+('1111', 'riki', 'asd', 'Jember', '123', 'A3'),
+('1112', 'adit', 'asd', 'polije', '123', 'KPA01'),
+('1222', 'Bangik', 'asd', 'asd', '123', 'KPA01'),
+('1234', 'Ricky Aditya Wardana', 'Meliodaskirisami@gmail.co', 'Desa Jajag Kecamatan Gambiran Banyuwangi', '1234', 'KPA01'),
+('1235', 'Muhammad Audino Fakhri Arnandya', 'dino12@gmail.com', 'Desa Jajag Kecamatan Gambiran Banyuwangi', 'akabiluru1', 'KPA02');
 
 -- --------------------------------------------------------
 
@@ -248,11 +306,59 @@ CREATE TABLE `tb_mengajar` (
 INSERT INTO `tb_mengajar` (`kode_mengajar`, `kode_guru`, `kode_mapel`, `kode_kelas`) VALUES
 (1, '1233', 'PA01', 'KPA01'),
 (2, '1233', 'PA10', 'KPA02'),
-(3, '1233', 'PA18', 'A3');
+(3, '1233', 'PA18', 'A3'),
+(4, '12333', 'PA02', 'KPA01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tugas`
+--
+
+CREATE TABLE `tugas` (
+  `id_tugas` int(11) NOT NULL,
+  `kode_aktivitas_tugas` int(11) NOT NULL,
+  `kode_mapel` varchar(10) NOT NULL,
+  `nis` varchar(10) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tugas2`
+--
+
+CREATE TABLE `tugas2` (
+  `kode_aktivitas2` int(11) NOT NULL,
+  `nama_tugas` varchar(50) NOT NULL,
+  `kode_mapel` varchar(10) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
+  `file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tugas2`
+--
+
+INSERT INTO `tugas2` (`kode_aktivitas2`, `nama_tugas`, `kode_mapel`, `deskripsi`, `file`) VALUES
+(1, 'Tugas Aljabar', 'PA01', 'tugase aljabar', 'asd'),
+(2, 'tugas trigono', 'PA01', 'tugase trigono', 'a');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aktivitas`
+--
+ALTER TABLE `aktivitas`
+  ADD PRIMARY KEY (`kode_aktivitas`),
+  ADD UNIQUE KEY `id_tugas_3` (`id_tugas`,`id_presensi`),
+  ADD KEY `id_tugas` (`id_tugas`,`id_presensi`),
+  ADD KEY `id_presensi` (`id_presensi`),
+  ADD KEY `id_tugas_2` (`id_tugas`,`id_presensi`);
 
 --
 -- Indexes for table `guru`
@@ -292,7 +398,8 @@ ALTER TABLE `materi_mapel`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kode_aktivitas` (`kode_aktivitas`,`kode_kelas`),
   ADD KEY `kode_kelas` (`kode_kelas`),
-  ADD KEY `kode_mapel` (`kode_mapel`);
+  ADD KEY `kode_mapel` (`kode_mapel`),
+  ADD KEY `kode_aktivitas2` (`kode_aktivitas2`,`kode_aktivitas3`);
 
 --
 -- Indexes for table `nilai`
@@ -304,7 +411,17 @@ ALTER TABLE `nilai`
 -- Indexes for table `presensi`
 --
 ALTER TABLE `presensi`
-  ADD PRIMARY KEY (`kd_presensi`);
+  ADD PRIMARY KEY (`kd_presensi`),
+  ADD KEY `kode_mapel` (`kode_mapel`,`nis`),
+  ADD KEY `nis` (`nis`),
+  ADD KEY `kode_aktivitas` (`kode_aktivitas`);
+
+--
+-- Indexes for table `presensi2`
+--
+ALTER TABLE `presensi2`
+  ADD PRIMARY KEY (`kode_aktivitas`),
+  ADD KEY `kode_mapel` (`kode_mapel`);
 
 --
 -- Indexes for table `siswa`
@@ -332,6 +449,21 @@ ALTER TABLE `tb_mengajar`
   ADD KEY `kode_kelas` (`kode_kelas`);
 
 --
+-- Indexes for table `tugas`
+--
+ALTER TABLE `tugas`
+  ADD PRIMARY KEY (`id_tugas`),
+  ADD KEY `nis` (`nis`),
+  ADD KEY `kode_aktivitas_tugas` (`kode_aktivitas_tugas`,`kode_mapel`);
+
+--
+-- Indexes for table `tugas2`
+--
+ALTER TABLE `tugas2`
+  ADD PRIMARY KEY (`kode_aktivitas2`),
+  ADD KEY `kode_mapel` (`kode_mapel`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -339,7 +471,7 @@ ALTER TABLE `tb_mengajar`
 -- AUTO_INCREMENT for table `materi_mapel`
 --
 ALTER TABLE `materi_mapel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `nilai`
@@ -351,7 +483,13 @@ ALTER TABLE `nilai`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `kd_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
+  MODIFY `kd_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
+
+--
+-- AUTO_INCREMENT for table `presensi2`
+--
+ALTER TABLE `presensi2`
+  MODIFY `kode_aktivitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tabel_hub_guru`
@@ -363,7 +501,19 @@ ALTER TABLE `tabel_hub_guru`
 -- AUTO_INCREMENT for table `tb_mengajar`
 --
 ALTER TABLE `tb_mengajar`
-  MODIFY `kode_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kode_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tugas`
+--
+ALTER TABLE `tugas`
+  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tugas2`
+--
+ALTER TABLE `tugas2`
+  MODIFY `kode_aktivitas2` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -386,7 +536,23 @@ ALTER TABLE `mapel`
 --
 ALTER TABLE `materi_mapel`
   ADD CONSTRAINT `materi_mapel_ibfk_1` FOREIGN KEY (`kode_kelas`) REFERENCES `kelas` (`kd_kelas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `materi_mapel_ibfk_2` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `materi_mapel_ibfk_2` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `materi_mapel_ibfk_3` FOREIGN KEY (`kode_aktivitas`) REFERENCES `presensi2` (`kode_aktivitas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `materi_mapel_ibfk_4` FOREIGN KEY (`kode_aktivitas2`) REFERENCES `tugas2` (`kode_aktivitas2`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `presensi`
+--
+ALTER TABLE `presensi`
+  ADD CONSTRAINT `presensi_ibfk_1` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `presensi_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `presensi_ibfk_3` FOREIGN KEY (`kode_aktivitas`) REFERENCES `presensi2` (`kode_aktivitas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `presensi2`
+--
+ALTER TABLE `presensi2`
+  ADD CONSTRAINT `presensi2_ibfk_1` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`);
 
 --
 -- Constraints for table `siswa`
@@ -407,6 +573,18 @@ ALTER TABLE `tb_mengajar`
   ADD CONSTRAINT `tb_mengajar_ibfk_1` FOREIGN KEY (`kode_guru`) REFERENCES `guru` (`nip`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tb_mengajar_ibfk_2` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tb_mengajar_ibfk_3` FOREIGN KEY (`kode_kelas`) REFERENCES `kelas` (`kd_kelas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tugas`
+--
+ALTER TABLE `tugas`
+  ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`kode_aktivitas_tugas`) REFERENCES `tugas2` (`kode_aktivitas2`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tugas2`
+--
+ALTER TABLE `tugas2`
+  ADD CONSTRAINT `tugas2_ibfk_1` FOREIGN KEY (`kode_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
