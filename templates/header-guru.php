@@ -1,5 +1,6 @@
 <?php
   require_once "config/init.php";
+  date_default_timezone_set('Asia/Jakarta');
 
   if( !isset($_SESSION['user_guru']) ){
     //$_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
@@ -30,6 +31,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./asset/style.css">
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <title>SIS ELENA</title>
   </head>
   <body>
